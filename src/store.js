@@ -3,6 +3,7 @@ import {
   createAction,
   createReducer,
   createSlice,
+  current,
 } from "@reduxjs/toolkit";
 
 // Redux Toolkit createAction 사용 => 없앤 코드
@@ -54,7 +55,7 @@ import {
 //     state.push({ text: action.payload, id: Date.now() });
 //   },
 //   [deleteToDo]: (state, action) =>
-//     // return이 바로 이루어짐 => mutate 일어나지 않음
+//     // return이 바로 이루어짐 => muhttps://redux-toolkit.js.org/api/other-exports/#currenttate 일어나지 않음
 //     state.filter((toDo) => toDo.id !== action.payload),
 // });
 
@@ -63,11 +64,10 @@ const toDos = createSlice({
   initialState: [],
   reducers: {
     add: (state, action) => {
-      state.push({ text: action.payload, id: Date.now() });
+      state.push({ text: action.payload, id: parseInt(Date.now()) });
     },
-    remove: (state, action) => {
-      state.filter((toDo) => toDo.id !== action.payload);
-    },
+    remove: (state, action) =>
+      state.filter((toDo) => toDo?.id !== action.payload),
   },
 });
 
